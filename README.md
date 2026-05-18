@@ -1,5 +1,7 @@
 # CSS Crimes Lab
 
+**Live demo:** https://remixmb.github.io/css-crimes/
+
 **A Stateful Application With No JavaScript and No Shame**
 
 This is a fake app where CSS handles routing, permissions, incident severity, compliance review, pricing, observability, query planning, and narrative branching. None of it is JavaScript. All of it is a cry for help.
