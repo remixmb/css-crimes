@@ -1,0 +1,939 @@
+@property --risk {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 10;
+}
+
+@property --latency {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 40;
+}
+
+@property --cost {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 12;
+}
+
+@property --spin {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --panic {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, rgb(236 72 153 / 0.3), transparent 28rem),
+    radial-gradient(circle at 90% 20%, rgb(34 211 238 / 0.22), transparent 24rem),
+    radial-gradient(circle at 50% 100%, rgb(132 204 22 / 0.16), transparent 28rem),
+    #07070b;
+  color: white;
+}
+
+code {
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.4rem;
+  background: rgb(255 255 255 / 0.12);
+  color: #bef264;
+}
+
+.machine {
+  --risk: 10;
+  --latency: calc(30 + var(--risk) * 3);
+  --cost: calc(12 + var(--risk) * 14);
+  --panic: 0;
+
+  --status: "200 OK";
+  --route: "GET /vibes";
+  --message: "\"Vibes retrieved. They smell faintly of Bootstrap 3.\"";
+  --auth-message: "anonymous request";
+  --cache-message: "cache bypassed";
+  --morale: "cautiously optimistic";
+  --crime: "CSS Crime: default state. Mostly harmless. The stylesheet is pretending to be normal.";
+
+  --accent-hue: calc(140 - var(--risk));
+  --accent: hsl(var(--accent-hue) 85% 55%);
+  --danger: hsl(calc(140 - var(--risk)) 90% 55%);
+  --glow: color-mix(in srgb, var(--accent), transparent 70%);
+
+  container-type: inline-size;
+
+  width: min(1180px, 92vw);
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+  margin: 4rem 0;
+  border-radius: 34px;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.035)),
+    #101014;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  box-shadow:
+    0 30px 100px rgb(0 0 0 / 0.5),
+    0 0 calc(var(--risk) * 0.7px) var(--glow);
+
+  transition:
+    --risk 0.45s ease,
+    --panic 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin: 0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent), transparent 82%);
+  color: color-mix(in srgb, var(--accent), white 30%);
+  border: 1px solid color-mix(in srgb, var(--accent), white 25%);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 11ch;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+}
+
+.hero p:not(.eyebrow) {
+  color: rgb(255 255 255 / 0.72);
+  max-width: 75ch;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+fieldset {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(255 255 255 / 0.05);
+}
+
+legend {
+  padding: 0 0.5rem;
+  color: color-mix(in srgb, var(--accent), white 35%);
+  font-weight: 950;
+}
+
+label {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  cursor: pointer;
+  color: rgb(255 255 255 / 0.88);
+  line-height: 1.35;
+}
+
+input {
+  accent-color: var(--accent);
+}
+
+.runtime {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.output {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), transparent),
+    #050507;
+  border: 1px solid color-mix(in srgb, var(--accent), white 22%);
+  box-shadow: 0 0 calc(30px + var(--risk) * 0.5px) var(--glow);
+  overflow: hidden;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.badge {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: #020617;
+  background: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.machine:has(#manager:checked) .badge::after {
+  content: " / enterprise";
+}
+
+.explainer,
+.metric,
+.response,
+.incident-level,
+.query-plan,
+.pricing-crime,
+.compliance,
+.code-review,
+.metrics-dashboard,
+.story-engine {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+.explainer {
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(255 255 255 / 0.84);
+}
+
+.explainer::before {
+  content: var(--crime);
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.metric {
+  display: grid;
+  gap: 0.3rem;
+  min-height: 5rem;
+  padding: 0.85rem;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.metric span {
+  color: rgb(255 255 255 / 0.56);
+  font-size: 0.8rem;
+}
+
+.metric strong {
+  font-size: 1.2rem;
+}
+
+.metric.risk strong::before {
+  counter-reset: risk var(--risk);
+  content: counter(risk) "%";
+}
+
+.metric.latency strong::before {
+  counter-reset: latency var(--latency);
+  content: counter(latency) "ms";
+}
+
+.metric.cost strong::before {
+  counter-reset: cost var(--cost);
+  content: "$" counter(cost);
+}
+
+.metric.morale strong::before {
+  content: var(--morale);
+}
+
+.risk-meter {
+  height: 1.25rem;
+  border-radius: 999px;
+  background: #27272a;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.risk-meter span {
+  display: block;
+  height: 100%;
+  width: calc(var(--risk) * 1%);
+  background: linear-gradient(90deg, #22c55e, #eab308, #ef4444);
+  transition: width 0.45s ease;
+}
+
+.incident-level {
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.06);
+}
+
+.incident-level::before {
+  content: "incident level: SEV-∞, pending CSS interpretation";
+}
+
+.machine:has(#get:checked):not(:has(#prod:checked)) .incident-level::before {
+  content: "incident level: none. Merely frontend nonsense.";
+}
+
+.machine:has(#post:checked):has(#prod:checked) .incident-level::before {
+  content: "incident level: SEV-2. Somebody opened Datadog.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .incident-level::before {
+  content: "incident level: SEV-1. The incident channel is now typing...";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked) .incident-level::before {
+  content: "incident level: SEV-0. Time is a flat circle.";
+}
+
+.machine:has(#manager:checked) .incident-level::before {
+  content: "incident level: reclassified as strategic learning opportunity.";
+}
+
+.response {
+  margin: 0;
+  min-height: 15rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.06), transparent),
+    #111118;
+  color: #d4d4d8;
+  overflow: auto;
+  line-height: 1.5;
+}
+
+.response::before {
+  content:
+    "{\A"
+    "  route: " var(--route) ",\A"
+    "  status: " var(--status) ",\A"
+    "  auth: " var(--auth-message) ",\A"
+    "  cache: " var(--cache-message) ",\A"
+    "  risk: " counter(risk) ",\A"
+    "  css_should_be_doing_this: false,\A"
+    "  architecture_review: \"denied with admiration\",\A"
+    "  message: " var(--message) "\A"
+    "}";
+  counter-reset: risk var(--risk);
+  white-space: pre;
+}
+
+.chaos-orb {
+  --size: clamp(16rem, 28cqi, 24rem);
+  --orbit-radius: calc(var(--size) / 2.8);
+  --dot-size: calc(0.55rem + var(--risk) * 0.025rem);
+  --speed: calc(10s - var(--risk) * 0.075s);
+
+  position: relative;
+  min-height: var(--size);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--accent), white 8%) 0 0.5rem, transparent 0.6rem),
+    radial-gradient(circle at center, color-mix(in srgb, var(--accent), transparent 80%), transparent 55%),
+    rgb(255 255 255 / 0.045);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.chaos-orb::before {
+  content: "CSS math goblin";
+  position: absolute;
+  z-index: 2;
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.45);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.chaos-orb::after {
+  content: "";
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--accent), white 25%);
+  opacity: 0.6;
+  filter: blur(calc(var(--panic) * 1px));
+}
+
+.chaos-orb i {
+  --i: 0;
+  --angle: calc(var(--i) * 60deg);
+
+  position: absolute;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 calc(12px + var(--risk) * 0.25px) var(--accent);
+
+  translate:
+    calc(cos(var(--angle) + var(--spin)) * var(--orbit-radius))
+    calc(sin(var(--angle) + var(--spin)) * var(--orbit-radius));
+
+  animation: orbit var(--speed) linear infinite;
+}
+
+.chaos-orb i:nth-child(1) { --i: 0; }
+.chaos-orb i:nth-child(2) { --i: 1; }
+.chaos-orb i:nth-child(3) { --i: 2; }
+.chaos-orb i:nth-child(4) { --i: 3; }
+.chaos-orb i:nth-child(5) { --i: 4; }
+.chaos-orb i:nth-child(6) { --i: 5; }
+
+.chaos-orb b {
+  position: absolute;
+  width: calc(4rem + var(--risk) * 0.08rem);
+  height: calc(4rem + var(--risk) * 0.08rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent), white 35%), transparent 65%);
+  filter: blur(calc(10px + var(--panic) * 3px));
+  opacity: calc(0.3 + var(--risk) * 0.005);
+}
+
+@keyframes orbit {
+  to {
+    --spin: 360deg;
+  }
+}
+
+.crime-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.crime-panels h2 {
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.query-plan,
+.pricing-crime,
+.compliance,
+.code-review,
+.metrics-dashboard,
+.story-engine {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 22px;
+  background: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.query-plan ol {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.query-plan li {
+  color: rgb(255 255 255 / 0.38);
+}
+
+.machine:has(#auth:checked) .step-auth,
+.machine:has(#get:checked) .step-route,
+.machine:has(#post:checked) .step-route,
+.machine:has(#delete:checked) .step-route,
+.machine:has(#cache:checked) .step-cache,
+.machine:has(#post:checked) .step-write,
+.machine:has(#delete:checked) .step-write,
+.machine:has(#cowboy:checked) .step-panic {
+  color: white;
+  font-weight: 900;
+}
+
+.machine:has(#auth:checked) .step-auth::after {
+  content: " ✅";
+}
+
+.machine:has(#cache:checked) .step-cache::after {
+  content: " ⚡ cache hit";
+}
+
+.machine:has(#post:checked) .step-write::after {
+  content: " ✍️ mutation scheduled";
+}
+
+.machine:has(#delete:checked) .step-write::after {
+  content: " 🚨 destructive operation";
+}
+
+.machine:has(#cowboy:checked) .step-panic::after {
+  content: " 🤠 blame assigned to previous sprint";
+}
+
+.price::before {
+  content: "estimated cloud bill: $12";
+}
+
+.pricing-note::before {
+  content: "pricing model: suspiciously simple";
+}
+
+.machine:has(#staging:checked) .price::before {
+  content: "estimated cloud bill: $47";
+}
+
+.machine:has(#prod:checked) .price::before {
+  content: "estimated cloud bill: $8,430";
+}
+
+.machine:has(#cache:checked) .price::before {
+  content: "estimated cloud bill: $3";
+}
+
+.machine:has(#post:checked):has(#prod:checked) .price::before {
+  content: "estimated cloud bill: $19,880";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .price::before {
+  content: "estimated cloud bill: emotionally unrecoverable";
+}
+
+.machine:has(#manager:checked) .pricing-note::before {
+  content: "pricing model: renamed 'platform investment'";
+}
+
+.machine:has(#cowboy:checked) .pricing-note::before {
+  content: "pricing model: one weird trick AWS hates";
+}
+
+.compliance p::before {
+  content: "review status: no findings, because nobody looked";
+}
+
+.machine:has(#post:checked) .compliance p::before {
+  content: "review status: requires DPIA, threat model, and one meeting everyone reschedules";
+}
+
+.machine:has(#delete:checked) .compliance p::before {
+  content: "review status: legal has joined the document anonymously";
+}
+
+.machine:has(#prod:checked):has(#cowboy:checked) .compliance p::before {
+  content: "review status: this demo is now discoverable in litigation";
+}
+
+.machine:has(#manager:checked) .compliance p::before {
+  content: "review status: approved verbally in hallway";
+}
+
+.code-review p::before {
+  content: "LGTM, assuming this is performance art.";
+}
+
+.machine:has(#post:checked) .code-review p::before {
+  content: "nit: why is CSS handling mutation state?";
+}
+
+.machine:has(#delete:checked) .code-review p::before {
+  content: "blocking: please do not implement database deletion in a cascade.";
+}
+
+.machine:has(#cowboy:checked) .code-review p::before {
+  content: "request changes: this PR contains ambition but no tests.";
+}
+
+.machine:has(#manager:checked) .code-review p::before {
+  content: "approved: leadership loves the energy.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked) .code-review p::before {
+  content: "blocking: I am not reviewing this. I am calling your manager.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked):has(#manager:checked) .code-review p::before {
+  content: "approved: manager is already here, apparently.";
+}
+
+.dash-metric.cpu::before {
+  content: "CPU: 12%";
+}
+
+.dash-metric.latency-dash::before {
+  content: "Latency: 40ms";
+}
+
+.dash-metric.morale-dash::before {
+  content: "Team morale: cautiously optimistic";
+}
+
+.machine:has(#prod:checked) .dash-metric.cpu::before {
+  content: "CPU: 78%";
+}
+
+.machine:has(#post:checked):has(#prod:checked) .dash-metric.latency-dash::before {
+  content: "Latency: 2.7s and rising";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .dash-metric.cpu::before {
+  content: "CPU: 100%";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .dash-metric.latency-dash::before {
+  content: "Latency: spiritually infinite";
+}
+
+.machine:has(#cowboy:checked) .dash-metric.morale-dash::before {
+  content: "Team morale: updating LinkedIn";
+}
+
+.machine:has(#manager:checked) .dash-metric.morale-dash::before {
+  content: "Team morale: performing alignment";
+}
+
+.story-engine p::before {
+  content: "You stand before the deployment pipeline. A button glows ominously.";
+}
+
+.machine:has(#get:checked) .story-engine p::before {
+  content: "You fetch the vibes. They arrive slightly stale but mostly harmless.";
+}
+
+.machine:has(#post:checked):not(:has(#auth:checked)) .story-engine p::before {
+  content: "You attempt to post feelings without auth. The feelings are rejected, which is relatable.";
+}
+
+.machine:has(#post:checked):has(#auth:checked) .story-engine p::before {
+  content: "Your feelings are accepted. A Kafka topic somewhere becomes emotionally available.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .story-engine p::before {
+  content: "You reach toward production. CSS slaps your hand away.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked) .story-engine p::before {
+  content: "You whisper 'ship it' into the void. The void opens Jira.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked):has(#manager:checked) .story-engine p::before {
+  content: "The manager smiles. The outage becomes a case study. You are promoted sideways.";
+}
+
+.crime-log {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.crime-log > h2 {
+  grid-column: 1 / -1;
+}
+
+@container (max-width: 850px) {
+  .runtime,
+  .controls,
+  .telemetry-grid,
+  .crime-log,
+  .crime-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .chaos-orb {
+    min-height: 18rem;
+  }
+}
+
+.crime-log article {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgb(255 255 255 / 0.055);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.crime-log strong {
+  color: color-mix(in srgb, var(--accent), white 35%);
+}
+
+.crime-log p {
+  color: rgb(255 255 255 / 0.68);
+  line-height: 1.45;
+}
+
+/* ============================================================
+   THE STATE MACHINE
+   ============================================================ */
+
+.machine:has(#get:checked) {
+  --route: "\"GET /vibes\"";
+  --status: "\"200 OK\"";
+  --message: "\"Vibes retrieved. They smell faintly of Bootstrap 3.\"";
+  --risk: 10;
+  --cost: 12;
+  --morale: "fine";
+  --crime: "CSS Crime: :has() detects GET and rewrites typed variables, fake JSON, and telemetry.";
+}
+
+.machine:has(#post:checked) {
+  --route: "\"POST /feelings\"";
+  --status: "\"202 Accepted\"";
+  --message: "\"Feelings accepted for async processing. Estimated completion: never.\"";
+  --risk: 45;
+  --cost: 620;
+  --morale: "fragile";
+  --crime: "CSS Crime: CSS is pretending to handle a POST mutation.";
+}
+
+.machine:has(#delete:checked) {
+  --route: "\"DELETE /production-db\"";
+  --status: "\"403 Forbidden\"";
+  --message: "\"Nice try. The database has unionized.\"";
+  --risk: 90;
+  --cost: 9800;
+  --morale: "updating LinkedIn";
+  --crime: "CSS Crime: selectors are enforcing destructive-operation policy.";
+}
+
+.machine:has(#dev:checked) {
+  --latency: calc(25 + var(--risk) * 1.5);
+}
+
+.machine:has(#staging:checked) {
+  --risk: 35;
+  --latency: calc(80 + var(--risk) * 2);
+  --cost: calc(90 + var(--risk) * 11);
+  --crime: "CSS Crime: staging overrides the calculated risk and latency variables.";
+}
+
+.machine:has(#prod:checked) {
+  --risk: 65;
+  --latency: calc(120 + var(--risk) * 4);
+  --cost: calc(800 + var(--risk) * 80);
+  --message: "\"Production selected. Everyone in Slack just stopped typing.\"";
+  --morale: "performing alignment";
+  --crime: "CSS Crime: production mode changes derived telemetry through variable math.";
+}
+
+.machine:has(#auth:checked) {
+  --auth-message: "\"valid bearer token\"";
+  --risk: calc(var(--risk) - 12);
+  --crime: "CSS Crime: checkbox state reduces risk like a fake security control.";
+}
+
+.machine:has(#cache:checked) {
+  --cache-message: "\"cache hit\"";
+  --latency: calc(var(--latency) * 0.35);
+  --cost: calc(var(--cost) * 0.4);
+  --crime: "CSS Crime: cache checkbox updates latency and cloud bill calculations.";
+}
+
+.machine:has(#cowboy:checked) {
+  --status: "\"202 Accepted, regrettably\"";
+  --message: "\"Cowboy mode enabled. The sprint board has been ignored.\"";
+  --risk: calc(var(--risk) + 25);
+  --panic: 1;
+  --morale: "negotiating severance";
+  --crime: "CSS Crime: cowboy mode mutates risk, animation, response text, and emotional state.";
+}
+
+.machine:has(#manager:checked) {
+  --status: "\"200 Looks Strategic\"";
+  --message: "\"The bug is now a roadmap item with executive visibility.\"";
+  --cost: calc(var(--cost) * 3);
+  --morale: "using phrases like scalable";
+  --crime: "CSS Crime: manager mode triples cost and reframes failure as strategy.";
+}
+
+/* Crime 05: CSS pretending to be a permissions system */
+
+.machine:has(#admin:checked) {
+  --auth-message: "admin token, spiritually suspicious";
+  --status: "200 Elevated";
+  --message: "\"Admin mode enabled. Security review has left the building.\"";
+  --risk: 65;
+  --accent-hue: 210;
+  --crime: "CSS Crime: a checkbox granted admin privileges. IAM team is crying.";
+}
+
+.machine:has(#intern:checked):has(#prod:checked) {
+  --status: "911 Paging Staff Engineer";
+  --message: "\"Intern has production access. The onboarding checklist has become evidence.\"";
+  --risk: 100;
+  --accent-hue: 0;
+  --crime: "CSS Crime: CSS is enforcing role-based access control using vibes.";
+}
+
+.machine:has(#intern:checked):has(#admin:checked):has(#prod:checked) {
+  animation: panic 0.08s infinite;
+  --status: "🔥 1000 Compliance Incident";
+  --message: "\"Intern self-certified as admin in production. SOC 2 has filed for divorce.\"";
+  --risk: 100;
+  --accent-hue: 350;
+  --crime: "CSS Crime: RBAC implemented as radio-button astrology.";
+}
+
+.machine:has(#post:checked):not(:has(#auth:checked)) {
+  --status: "\"401 Unauthorized\"";
+  --message: "\"POST /feelings requires auth. Emotional vulnerability rejected.\"";
+  --risk: 75;
+  --cost: 1200;
+  --morale: "defensive";
+  --crime: "CSS Crime: compound selector behaves like IF endpoint=POST AND NOT auth.";
+}
+
+.machine:has(#get:checked):has(#cache:checked) {
+  --status: "\"304 Not Modified\"";
+  --message: "\"Served from cache. CSS briefly cosplayed as a CDN.\"";
+  --risk: 5;
+  --latency: 12;
+  --cost: 3;
+  --morale: "suspiciously good";
+  --crime: "CSS Crime: GET + cache creates a fake HTTP cache response.";
+}
+
+.machine:has(#post:checked):has(#auth:checked):has(#staging:checked) {
+  --status: "\"201 Created\"";
+  --message: "\"Authenticated staging write. Shockingly responsible.\"";
+  --risk: 30;
+  --cost: 410;
+  --morale: "tentatively proud";
+  --crime: "CSS Crime: three independent UI states produce a different fake route outcome.";
+}
+
+.machine:has(#post:checked):has(#auth:checked):has(#prod:checked) {
+  --status: "\"201 Created\"";
+  --message: "\"Production write accepted. Observability team is sweating through fleece.\"";
+  --risk: 70;
+  --cost: 19880;
+  --morale: "saying this is fine";
+  --crime: "CSS Crime: CSS calculated a production mutation outcome without JavaScript.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked) {
+  --status: "\"500 Existential Crisis\"";
+  --message: "\"CSS prevented production deletion. Heroism? Governance failure? Both.\"";
+  --risk: 100;
+  --latency: 999;
+  --cost: 99999;
+  --panic: 1;
+  --morale: "gone";
+  --crime: "CSS Crime: DELETE + production triggers incident mode, telemetry spikes, and moral collapse.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked) {
+  animation: panic 0.12s infinite;
+  --status: "\"💀 999 Career-Limiting Event\"";
+  --message: "\"You combined DELETE, production, and cowboy mode. HR has entered the Zoom.\"";
+  --risk: 100;
+  --latency: 999;
+  --cost: 8675309;
+  --panic: 4;
+  --morale: "archived";
+  --crime: "CSS Crime: stacked selectors generated a full incident report and screen panic.";
+}
+
+.machine:has(#delete:checked):has(#prod:checked):has(#cowboy:checked):has(#manager:checked) {
+  --status: "\"200 Executive Alignment\"";
+  --message: "\"Incident reframed as bold transformation initiative.\"";
+  --cost: 42000000;
+  --morale: "promoted sideways";
+  --panic: 2;
+  --crime: "CSS Crime: manager checkbox converts outage into strategy. This is now capitalism.";
+}
+
+.machine:has(label:hover) {
+  outline: 2px solid color-mix(in srgb, var(--accent), white 25%);
+  outline-offset: 0.35rem;
+}
+
+.machine:has(#cowboy:checked) .output {
+  rotate: -0.35deg;
+}
+
+.machine:has(#delete:checked):has(#prod:checked) .output {
+  filter: saturate(1.35) contrast(1.08);
+}
+
+@keyframes panic {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+
+  25% {
+    transform: translate(calc(var(--panic) * 1px), calc(var(--panic) * -1px)) rotate(0.2deg);
+  }
+
+  50% {
+    transform: translate(calc(var(--panic) * -1px), calc(var(--panic) * 0.75px)) rotate(-0.2deg);
+  }
+
+  75% {
+    transform: translate(calc(var(--panic) * 0.75px), calc(var(--panic) * 1px)) rotate(0.12deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .controls,
+  .runtime,
+  .telemetry-grid,
+  .crime-log,
+  .crime-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .machine {
+    margin: 2rem 0;
+    padding: 1.25rem;
+  }
+}

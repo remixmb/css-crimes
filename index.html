@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Crimes Lab: A Stateful Application With No JavaScript and No Shame</title>
+    <meta
+      name="description"
+      content="A pure CSS application demonstrating state, calculations, fake routing, telemetry, RBAC, compliance, and poor architectural boundaries."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="machine">
+      <header class="hero">
+        <p class="eyebrow">CSS is no longer asking permission.</p>
+        <h1>CSS Crimes Lab</h1>
+        <p>
+          A pure CSS “application” demonstrating state, calculations, fake routing,
+          telemetry, conditional logic, orbit math, RBAC, compliance review, pricing,
+          observability, narrative branching, and poor architectural boundaries.
+          <strong>No JavaScript. All of it is a cry for help.</strong>
+        </p>
+      </header>
+
+      <section class="controls" aria-label="CSS crime controls">
+        <fieldset>
+          <legend>Endpoint</legend>
+
+          <label for="get">
+            <input type="radio" name="endpoint" id="get" checked />
+            <span>GET /vibes</span>
+          </label>
+
+          <label for="post">
+            <input type="radio" name="endpoint" id="post" />
+            <span>POST /feelings</span>
+          </label>
+
+          <label for="delete">
+            <input type="radio" name="endpoint" id="delete" />
+            <span>DELETE /production-db</span>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Environment</legend>
+
+          <label for="dev">
+            <input type="radio" name="env" id="dev" checked />
+            <span>Localhost</span>
+          </label>
+
+          <label for="staging">
+            <input type="radio" name="env" id="staging" />
+            <span>Staging</span>
+          </label>
+
+          <label for="prod">
+            <input type="radio" name="env" id="prod" />
+            <span>Production</span>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bad Ideas</legend>
+
+          <label for="auth">
+            <input type="checkbox" id="auth" />
+            <span>Auth token present</span>
+          </label>
+
+          <label for="cache">
+            <input type="checkbox" id="cache" />
+            <span>Cache enabled</span>
+          </label>
+
+          <label for="cowboy">
+            <input type="checkbox" id="cowboy" />
+            <span>Cowboy mode</span>
+          </label>
+
+          <label for="manager">
+            <input type="checkbox" id="manager" />
+            <span>Manager watching</span>
+          </label>
+
+          <label for="admin">
+            <input type="checkbox" id="admin" />
+            <span>Admin privileges, self-certified</span>
+          </label>
+
+          <label for="intern">
+            <input type="checkbox" id="intern" />
+            <span>Intern has prod access</span>
+          </label>
+        </fieldset>
+      </section>
+
+      <section class="runtime">
+        <div class="output">
+          <div class="output-header">
+            <h2>CSS Runtime Output</h2>
+            <span class="badge">no js</span>
+          </div>
+
+          <div class="explainer"></div>
+
+          <div class="telemetry-grid">
+            <div class="metric risk">
+              <span>Risk</span>
+              <strong></strong>
+            </div>
+
+            <div class="metric latency">
+              <span>Latency</span>
+              <strong></strong>
+            </div>
+
+            <div class="metric cost">
+              <span>Cloud Bill</span>
+              <strong></strong>
+            </div>
+
+            <div class="metric morale">
+              <span>Team Morale</span>
+              <strong></strong>
+            </div>
+          </div>
+
+          <div class="risk-meter" aria-hidden="true">
+            <span></span>
+          </div>
+
+          <div class="incident-level" aria-live="polite"></div>
+
+          <pre class="response"></pre>
+        </div>
+
+        <div class="chaos-orb" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <b></b>
+        </div>
+      </section>
+
+      <section class="crime-panels" aria-label="Additional CSS crimes">
+        <section class="query-plan">
+          <h2>CSS Query Planner</h2>
+          <ol>
+            <li class="step-auth">Check authentication</li>
+            <li class="step-route">Resolve route</li>
+            <li class="step-cache">Inspect cache</li>
+            <li class="step-write">Perform write operation</li>
+            <li class="step-panic">Deny responsibility</li>
+          </ol>
+        </section>
+
+        <section class="pricing-crime">
+          <h2>CSS Pricing Engine</h2>
+          <p class="price"></p>
+          <p class="pricing-note"></p>
+        </section>
+
+        <section class="compliance">
+          <h2>Compliance Review</h2>
+          <p></p>
+        </section>
+
+        <section class="code-review">
+          <h2>Automated CSS Code Review</h2>
+          <p></p>
+        </section>
+
+        <section class="metrics-dashboard">
+          <h2>Observability, Allegedly</h2>
+          <div class="dash-metric cpu"></div>
+          <div class="dash-metric latency-dash"></div>
+          <div class="dash-metric morale-dash"></div>
+        </section>
+
+        <section class="story-engine">
+          <h2>CSS Narrative Engine</h2>
+          <p></p>
+        </section>
+      </section>
+
+      <section class="crime-log">
+        <h2>What CSS is doing here</h2>
+
+        <article>
+          <strong>Typed variables</strong>
+          <p><code>@property</code> defines numeric custom properties that can animate and participate in calculations.</p>
+        </article>
+
+        <article>
+          <strong>Math</strong>
+          <p><code>calc()</code> turns fake risk into fake latency, fake cost, blur, rotation, and meter width.</p>
+        </article>
+
+        <article>
+          <strong>State machine</strong>
+          <p><code>:has()</code> lets CSS inspect checked inputs and rewrite variables higher up the tree.</p>
+        </article>
+
+        <article>
+          <strong>Generated data</strong>
+          <p><code>::before</code> prints fake JSON, status codes, telemetry, and narrative output.</p>
+        </article>
+
+        <article>
+          <strong>Container logic</strong>
+          <p><code>@container</code> changes the component based on its own width instead of the viewport.</p>
+        </article>
+
+        <article>
+          <strong>Color math</strong>
+          <p><code>color-mix()</code> derives UI colors from the current “risk” state.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
