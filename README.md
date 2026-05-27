@@ -25,6 +25,10 @@ Then add **Intern has prod access** + **Admin privileges, self-certified** for m
 - `color-mix()` — accent colors derived from “risk”
 - `sin()` / `cos()` — orbital particle math
 
+## Browser support
+
+Relies on bleeding-edge CSS: `:has()`, `@property`, `@container`, `color-mix()`, `sin()` / `cos()`. Works in current Chrome, Edge, Safari (17+), and Firefox. Older browsers will see a degraded but not broken page.
+
 ## Local preview
 
 ```bash
