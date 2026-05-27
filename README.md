@@ -4,6 +4,8 @@
 
 **A Stateful Application With No JavaScript and No Shame**
 
+![CSS Crimes Lab showing the DELETE production database chaos combo](docs/assets/css-crimes-chaos.png)
+
 This is a fake app where CSS handles routing, permissions, incident severity, compliance review, pricing, observability, query planning, and narrative branching. None of it is JavaScript. All of it is a cry for help.
 
 ## Try the chaos combo
